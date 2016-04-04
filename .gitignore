@@ -1,0 +1,10 @@
+# backup files
+*~
+*.swp
+
+# binary files
+*.o
+*.d
+*.exe
+*.dll
+
