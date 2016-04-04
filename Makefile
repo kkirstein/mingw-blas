@@ -55,7 +55,7 @@ include make.inc
 #
 #######################################################################
 
-all: $(BLASLIB)
+all: $(BLASLIB) $(BLASLIBDLL)
  
 #---------------------------------------------------------
 #  Comment out the next 6 definitions if you already have
@@ -141,6 +141,13 @@ $(BLASLIB): $(ALLOBJ)
 	$(ARCH) $(ARCHFLAGS) $@ $(ALLOBJ)
 	$(RANLIB) $@
 
+$(BLASLIBDLL): $(ALLOBJ)
+	$(FORTRAN) --shared $(OPTS) -o $@ \
+		-Wl,--out-implib=${BLASLIBDLL}.a \
+		-Wl,--export-all-symbols \
+		-Wl,--enable-auto-import \
+		$^ 
+
 single: $(SBLAS1) $(ALLBLAS) $(SBLAS2) $(SBLAS3)
 	$(ARCH) $(ARCHFLAGS) $(BLASLIB) $(SBLAS1) $(ALLBLAS) \
 	$(SBLAS2) $(SBLAS3)
@@ -161,11 +168,15 @@ complex16: $(ZBLAS1) $(ZB1AUX) $(ALLBLAS) $(ZBLAS2) $(ZBLAS3)
 	$(ALLBLAS) $(ZBLAS2) $(ZBLAS3)
 	$(RANLIB) $(BLASLIB)
 
+
 FRC:
 	@FRC=$(FRC)
 
 clean:
 	rm -f *.o
+
+cleanall: clean
+	rm -f $(BLASLIB) $(BLASLIBDLL) $(BLASLIBDLL).a
 
 .f.o: 
 	$(FORTRAN) $(OPTS) -c $< -o $@

@@ -33,3 +33,4 @@ RANLIB   = /usr/bin/x86_64-w64-mingw32-ranlib
 #  The location and name of the Reference BLAS library.
 #
 BLASLIB      = libblas.a
+BLASLIBDLL   = libblas.dll

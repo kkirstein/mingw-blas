@@ -4,7 +4,6 @@
 
 # binary files
 *.o
-*.d
-*.exe
+*.a
 *.dll
 
