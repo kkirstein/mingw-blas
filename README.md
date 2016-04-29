@@ -16,6 +16,7 @@ Currently, version 3.6.0 of the [BLAS](http://www.netlib.org/blas/index.html) li
 
 3. Copy the generated library files (`libblas.a`, `libblas.dll.a` and `libblas.dll`) to the desired folders.
 
+
 ## TODO
 
 * add switches to compile for either `x86_64` or `i686` architecture.
